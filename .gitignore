@@ -1,0 +1,12 @@
+# Terraform durum dosyalari (İçinde şifreler olabilir)
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# SSH Anahtarlari
+*.pem
+
+# IDE dosyalari
+.vscode/
+.idea/
+.DS_Store
