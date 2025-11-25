@@ -1,25 +1,24 @@
-# 1. Baz İmaj: Python 3.9'un hafif sürümünü kullan (Linux tabanlı)
+# 1. Baz İmaj
 FROM python:3.9-slim
 
 # 2. Çalışma Dizinini Ayarla
 WORKDIR /app
 
-# 3. Gereksinim dosyasını kopyala ve yükle
-# (Önce bunu yapıyoruz ki kod değişse bile kütüphaneler tekrar indirilmesin - Cache mantığı)
+# 3. Gereksinimleri Yükle
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Uygulama kodlarını kopyala
+# 4. Kodları Kopyala
 COPY . .
 
-# 5. Konteynerin dış dünyaya açacağı portu belirt
-EXPOSE 80
+# 5. Port Ayarı (Terraform Target Group ile uyumlu: 5000)
+EXPOSE 5000
 
-# 6. Ortam değişkenleri için default değerler (Gerekirse ezilebilir)
+# 6. Default Env (Test için)
 ENV DB_HOST=localhost \
-    DB_USER=admin \
-    DB_PASSWORD=change-me \
+    DB_USER=root \
+    DB_PASSWORD=password \
     DB_NAME=testdb
 
-# 7. Uygulamayı başlat
+# 7. Flask Uygulamasını Başlat (Host 0.0.0.0 önemli!)
 CMD ["python", "app.py"]
