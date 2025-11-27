@@ -1,5 +1,5 @@
 # app.tf
-
+#
 # 1. Launch Template
 # EC2 sunucuları nasıl ayağa kalkacak?
 resource "aws_launch_template" "app_lt" {
